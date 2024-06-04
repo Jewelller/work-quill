@@ -46,7 +46,7 @@ function login() {
     console.log("login");
     if (valid) {
         loading.value = true;
-        AuthService.login({
+        AuthService.usernameLogin({
             username: username.value,
             password: password.value,
         })

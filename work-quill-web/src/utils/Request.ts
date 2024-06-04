@@ -3,7 +3,7 @@ import { WorkQuillWeb } from "./Url";
 
 const instance = axios.create({
     baseURL: WorkQuillWeb.API_URL_PREFIX,
-    timeout: 2000,
+    timeout: 10000,
 });
 
 export function Get(endpoint: string, query: object | string | null) {
