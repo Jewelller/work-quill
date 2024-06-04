@@ -1,7 +1,6 @@
 package com.qwizery.workquillserverbase.auth.username;
 
 import com.qwizery.workquillserverbase.util.JSON;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +34,7 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
         log.debug("Using UsernameAuthenticationFilter");
 
         // 提取请求数据

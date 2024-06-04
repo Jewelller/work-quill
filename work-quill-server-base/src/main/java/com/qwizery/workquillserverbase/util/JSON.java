@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 public class JSON {
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Logger log = LoggerFactory.getLogger(JSON.class);
 
     private static class HashMap extends java.util.HashMap<String, Object> {
     }
@@ -33,7 +36,8 @@ public class JSON {
     public static String stringify(Object obj) {
         try {
             if (obj == null) {
-                return null;
+                log.warn("Parsing a null object");
+                return "{}";
             } else if (obj instanceof String) {
                 return obj.toString();
             }

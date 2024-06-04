@@ -1,6 +1,6 @@
 package com.qwizery.workquillserverbase.auth.username;
 
-import com.qwizery.workquillserverbase.auth.UserLoginInfo;
+import com.qwizery.workquillserverbase.auth.record.UserLoginRecord;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -18,7 +18,7 @@ public class UsernameAuthentication extends AbstractAuthenticationToken {
 
     private String username; // 前端传过来
     private String password; // 前端传过来
-    private UserLoginInfo currentUser; // 认证成功后，后台从数据库获取信息
+    private UserLoginRecord currentUser; // 认证成功后，后台从数据库获取信息
 
     public UsernameAuthentication() {
         // 权限，用不上，直接null
