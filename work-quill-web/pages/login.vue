@@ -1,31 +1,33 @@
 <template>
-    <v-form v-model="valid" @submit="login" onsubmit="return false">
-        <v-row>
-            <v-col cols="8" offset="2">
-                <v-text-field
-                    v-model="username"
-                    label="Username"
-                    :rules="usernameRule"
-                    required
-                />
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="8" offset="2">
-                <v-text-field
-                    v-model="password"
-                    label="Password"
-                    :rules="passwordRule"
-                    required
-                />
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="6" offset="3">
-                <v-btn type="submit" :loading="loading" block>Login</v-btn>
-            </v-col>
-        </v-row>
-    </v-form>
+    <div>
+        <v-form v-model="valid" @submit="login" onsubmit="return false">
+            <v-row>
+                <v-col cols="8" offset="2">
+                    <v-text-field
+                        v-model="username"
+                        label="Username"
+                        :rules="usernameRule"
+                        required
+                    />
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="8" offset="2">
+                    <v-text-field
+                        v-model="password"
+                        label="Password"
+                        :rules="passwordRule"
+                        required
+                    />
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="6" offset="3">
+                    <v-btn type="submit" :loading="loading" block>Login</v-btn>
+                </v-col>
+            </v-row>
+        </v-form>
+    </div>
 </template>
 
 <script setup>
