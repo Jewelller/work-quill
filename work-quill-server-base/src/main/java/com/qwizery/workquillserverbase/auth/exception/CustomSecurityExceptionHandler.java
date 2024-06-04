@@ -29,7 +29,7 @@ public class CustomSecurityExceptionHandler extends OncePerRequestFilter {
 
     @Override
     public void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
-                                 @NonNull FilterChain filterChain) throws ServletException, IOException {
+                                 @NonNull FilterChain filterChain) throws IOException {
         try {
             filterChain.doFilter(request, response);
         } catch (BaseException e) {
@@ -60,7 +60,7 @@ public class CustomSecurityExceptionHandler extends OncePerRequestFilter {
             // 未知异常
             Result result = Result.error("error.internal_error");
 
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             PrintWriter writer = response.getWriter();
             writer.write(JSON.stringify(result));
