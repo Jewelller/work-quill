@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev # Development environment , here is dev
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yml # 文件后缀名
+        group: WORK_QUILL
+        prefix: work-quill-web-configuration

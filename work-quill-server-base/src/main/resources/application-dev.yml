@@ -1,0 +1,46 @@
+server:
+  port: 9010
+
+spring:
+  application:
+    name: work-quill-server-base
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mariadb://localhost:3306/work_quill_base
+
+  mvc:
+    view:
+      suffix: .html
+
+  devtools:
+    restart:
+      enabled: true
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+
+management:
+  endpoint:
+    nacosdiscovery:
+      enabled: true
+
+# Logging
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+# Custom configuration
+boot:
+  failed:
+    page: /failed
+
+app:
+  default-language: zh_CN
+  base:
+    api:
+      prefix: /api
