@@ -11,8 +11,7 @@ spring:
     url: jdbc:mariadb://localhost:3306/work_quill_base
   sql:
     init:
-      schema-locations: db/work_quill_base_schema.sql
-
+      schema-locations: classpath:db/work_quill_base_schema.sql
 
   mvc:
     view:
@@ -44,9 +43,9 @@ app:
       username-login-path: /auth/login/username
 
   jwt:
-    private-key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCt+JeR7g4yWODCnlYsnqVe0zfP4hdcERVUwsDpx2UC3ynkqsOLfDND5aDlHm7xiHITeDGgLoadYfTppc23ImjWZWHrSmFHu71Q/ewVI4YciDkPrrsJ+u8sL1dc004cOKryWkvbdd85biMhT4Y4hKSDdjHlkGbfa1JA2t65GV3sV4artz+Y+7kGh3RM9MXf4kdFgnvcTiRPRdd9rPcWjaswsSNz7li/giYHmGSPegU682SZVymu5+4QVcxgqNf8c17fePu1K2lCFJtyGszEMmpFWWbFPRjDNXsgeGcSqI4heIbZKlC7zgEwvSdq6zh0cqgCmaPN9auokKNwKFx9EUwlAgMBAAECggEABfHzpaY2Kfyx9M5AZHBcQ/jn2vZlyFzbfVs8CHRd77kvz1BFANeshARG37P1V2x+qX4Q0OG5WL60n39t0w8dkgx1sJRVurcGgzJwoB0bEI9YxwzR+EdXZ3Hx6r3CpftxxawJFGWn/5ugUht+zlOjsGWYbIXnKt9m0i/CLx6+ZomQsICQbCh+6OribR9kxJCcmFIPPlUeJr56PgWOf1PXhAB4L0dD7WvP8ItuXPWcSVOxnXvK1DrE48lN0U80vTnAy8H8NPlDLPUf9traQhqSUAQPNDIJfjgpS9WfWWDnnTCfi6aDbmITw/8OFFrqVaEy1bH7CdAujIPy/Un2x+teyQKBgQDoJ2zL6YroWs4WTl0Ap/AaSQBtzb+g+lkaqjtLk6HaKrIEsHN13UFiQ4HgeiRm53x7R+MansAeIYOxEgrYgTqJLIWaIuoKMhDQxa+4GEfXSp8rGEjh+YrvEKPu2do270dZMxRwL6+n/Fyb3Ed/u8rN4SOLnxz/3NPHq13zI7eECwKBgQC/1zmoUhuOzlwH/WEB5aAEXqUgzdFw69/G36ESDqfp6g/VUQIWPjsH8WzT3r6u9AtDtsvbHrIKWTHZWdbfA8jP8rxV2SPdALWL8dKyn+8B4XI3zkfr9N4htj8BOqbQfKWYVWygS9ffh1xr5Kq6zta10PzwBDsR85iz8KqsEkfejwKBgQDlAT8JRy+HVUvGJTcI1qC6zRhnOHa3zTzoWNR1EQSvuT4x8f1zXvaIgB812EbgW6kn0xnrwH2zO0w0959LQu8DMa/5BEfqFskPqHJWH11+ulWYpTP/9bFfcgLEMpJXbmHrU7/tipy0EPUpqnm9PvonbNcre6GXo7YlWJ4soib9UQKBgDe5sCDpwOGJpggYHP6tEf9S8sqFnsobakRdn28cXMBA4lqHjoChkQosof0lXeR6NW91AOBkmTkSUb2eMCFV+xYUn4qcaaN/2jyNgTOr64RzVXdKb2/mEERgqQqVW/GB06RdZBFoFovyyPD6WnGrNYlY7LBXukTrqrbSOPGE2eWXAoGAWFNs+m3JKAOSMxKG7b7txTZTzojYIyoCAZwLWzS/ZNgn402JBG/1D98EEujTE86/2BhMxL4z7zWVJFhPHiAyPmzWi8lP+enraqLDwZd39olLWry8ePhcFQDCPgF0Y+bJmqISZXCqEfF5ddfIRdzEO+Ry0VliqTdTPzi2gFOkMA4=
-    public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArfiXke4OMljgwp5WLJ6lXtM3z+IXXBEVVMLA6cdlAt8p5KrDi3wzQ+Wg5R5u8YhyE3gxoC6GnWH06aXNtyJo1mVh60phR7u9UP3sFSOGHIg5D667CfrvLC9XXNNOHDiq8lpL23XfOW4jIU+GOISkg3Yx5ZBm32tSQNreuRld7FeGq7c/mPu5Bod0TPTF3+JHRYJ73E4kT0XXfaz3Fo2rMLEjc+5Yv4ImB5hkj3oFOvNkmVcprufuEFXMYKjX/HNe33j7tStpQhSbchrMxDJqRVlmxT0YwzV7IHhnEqiOIXiG2SpQu84BML0naus4dHKoApmjzfWrqJCjcChcfRFMJQIDAQAB
+    private-key: # Read from local file
+    public-key: # Read from local file
     # minutes
-    expire-time: 10
-    refresh-time: 30
+    expire-time: 1
+    refresh-time: 60
 
