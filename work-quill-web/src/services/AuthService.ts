@@ -1,15 +1,13 @@
-import { WorkQuillWeb } from "../utils/Url";
-import { Post } from "../utils/Request";
-import type { ModelRef } from "vue";
+import { Post } from "../../utils/Request";
 
 interface LoginRequestParams {
-    username: string | undefined;
-    password: string | undefined;
+    username: string;
+    password: string;
 }
 
 export class AuthService {
-    static async login({ username, password }: LoginRequestParams) {
-        return Post(WorkQuillWeb.API_URL.auth.login, {
+    static async usernameLogin({ username, password }: LoginRequestParams) {
+        return Post(API_URL.auth.login.username, {
             username,
             password,
         });

@@ -1,29 +1,27 @@
 <template>
     <div>
+        <Head>
+            <Title>Home</Title>
+        </Head>
+
         <div>Home Page</div>
         <NuxtLink to="/login">Login Page</NuxtLink>
+
+        <v-btn @click="logout">Logout</v-btn>
+        <v-btn @click="loginInfo">Show Login Info</v-btn>
     </div>
 </template>
 
-<script setup>
-class A {
-    constructor() {
-        this.a = 1;
-        this.b = 2;
-        this.c = 3;
-    }
-
-    hello() {
-        console.log(this.a, this.b, this.c);
-        const func = () => {
-            console.log(this.a, this.b, this.c);
-        };
-        func();
-    }
+<script lang="ts" setup>
+function logout() {
+    const authStore = useAuthenticationStore();
+    log.debug("reset auth store");
+    authStore.$reset();
 }
-
-let a = new A();
-a.hello();
+function loginInfo() {
+    const authStore = useAuthenticationStore();
+    log.debug("get auth store", authStore.$state);
+}
 </script>
 
 <style></style>

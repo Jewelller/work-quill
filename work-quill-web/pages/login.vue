@@ -1,6 +1,9 @@
 <template>
     <div>
-        <v-form v-model="valid" @submit="login" onsubmit="return false">
+        <Head>
+            <Title>Login</Title>
+        </Head>
+        <v-form v-model="valid" @submit.prevent="login">
             <v-row>
                 <v-col cols="8" offset="2">
                     <v-text-field
@@ -15,6 +18,7 @@
                 <v-col cols="8" offset="2">
                     <v-text-field
                         v-model="password"
+                        type="password"
                         label="Password"
                         :rules="passwordRule"
                         required
@@ -23,7 +27,9 @@
             </v-row>
             <v-row>
                 <v-col cols="6" offset="3">
-                    <v-btn type="submit" :loading="loading" block>Login</v-btn>
+                    <v-btn type="submit" :loading="loading" block>
+                        Login
+                    </v-btn>
                 </v-col>
             </v-row>
         </v-form>
@@ -32,6 +38,7 @@
 
 <script setup>
 import { AuthService } from "~/src/services/AuthService";
+import { log } from "~/utils/Log";
 
 const valid = defineModel("vaild", { default: false });
 const loading = defineModel("loading", { default: false });
@@ -39,22 +46,34 @@ const loading = defineModel("loading", { default: false });
 const username = defineModel("username");
 const password = defineModel("password");
 
-const usernameRule = [(v) => !!v || "Username is required"];
-const passwordRule = [(v) => !!v || "Password is required"];
+const usernameRule = [
+    (value) => {
+        if (value) return true;
+        return "Username is required";
+    },
+];
+const passwordRule = [
+    (value) => {
+        if (value) return true;
+        return "Password is required";
+    },
+    (value) => {
+        if (value.length >= 8) return true;
+        return "Password requires at lease 8 characters";
+    },
+];
 
 function login() {
-    console.log("login");
+    log.debug("login");
     if (valid) {
         loading.value = true;
-        AuthService.login({
+        AuthService.usernameLogin({
             username: username.value,
             password: password.value,
         })
-            .then((res) => {
-                console.log(res);
-            })
+            .then((res) => {})
             .catch((err) => {
-                console.log(err);
+                log.error(err);
             })
             .finally(() => {
                 loading.value = false;
