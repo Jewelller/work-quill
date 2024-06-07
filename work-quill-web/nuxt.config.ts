@@ -4,9 +4,9 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
     app: {
         pageTransition: {
-            name: 'page',
-            mode: 'out-in'
-        }
+            name: "page",
+            mode: "out-in",
+        },
     },
     build: {
         transpile: ["vuetify"],
@@ -20,6 +20,8 @@ export default defineNuxtConfig({
                 config.plugins.push(vuetify({ autoImport: true }));
             });
         },
+        "@pinia/nuxt",
+        "@pinia-plugin-persistedstate/nuxt",
     ],
     tres: {
         devtools: true, // devtools support for tresjs
