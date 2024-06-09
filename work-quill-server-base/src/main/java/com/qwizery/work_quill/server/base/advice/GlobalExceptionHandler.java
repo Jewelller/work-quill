@@ -1,7 +1,7 @@
 package com.qwizery.work_quill.server.base.advice;
 
+import com.qwizery.work_quill.component.model.Result;
 import com.qwizery.work_quill.server.base.exception.BaseException;
-import com.qwizery.work_quill.server.base.model.Result;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;

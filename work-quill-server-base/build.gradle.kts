@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.2.6"
     id("io.spring.dependency-management") version "1.1.5"
 }
+
 val springCloudVersion by extra("2023.0.1")
 val springCloudAlibabaVersion by extra("2023.0.1.0")
 
@@ -44,6 +45,9 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.5")
 
+    // Components
+    implementation(project(":work-quill-component"))
+
     compileOnly("org.projectlombok:lombok")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -58,6 +62,7 @@ dependencies {
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
+
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
@@ -68,3 +73,5 @@ dependencyManagement {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.register("prepareKotlinBuildScriptModel"){}

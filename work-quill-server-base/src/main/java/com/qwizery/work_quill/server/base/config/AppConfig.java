@@ -1,10 +1,12 @@
 package com.qwizery.work_quill.server.base.config;
 
+import com.qwizery.work_quill.component.i18n.LanguageTool;
 import com.qwizery.work_quill.server.base.util.JwtTool;
-import com.qwizery.work_quill.server.base.util.LanguageTool;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +28,12 @@ public class AppConfig {
 
     @Value("${app.jwt.public-key}")
     private String jwtPublicKey;
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @Bean
     public int initStatic() {

@@ -1,8 +1,8 @@
 package com.qwizery.work_quill.server.base.auth;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.qwizery.work_quill.component.model.Result;
 import com.qwizery.work_quill.server.base.mapper.RoleMapper;
-import com.qwizery.work_quill.server.base.model.Result;
 import com.qwizery.work_quill.server.base.util.JSON;
 import com.qwizery.work_quill.server.base.auth.record.UserLoginRecord;
 import com.qwizery.work_quill.server.base.entity.Role;

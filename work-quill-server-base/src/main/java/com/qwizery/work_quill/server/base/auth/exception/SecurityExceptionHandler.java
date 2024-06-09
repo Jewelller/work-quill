@@ -1,7 +1,7 @@
 package com.qwizery.work_quill.server.base.auth.exception;
 
+import com.qwizery.work_quill.component.model.Result;
 import com.qwizery.work_quill.server.base.exception.BaseException;
-import com.qwizery.work_quill.server.base.model.Result;
 import com.qwizery.work_quill.server.base.util.JSON;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
