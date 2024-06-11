@@ -3,7 +3,7 @@
         <Head>
             <Title>Login</Title>
         </Head>
-        <v-form v-model="valid" @submit.prevent="login">
+        <v-form v-model="valid" @submit.prevent="login" fast-fail>
             <v-row>
                 <v-col cols="8" offset="2">
                     <v-text-field
@@ -40,6 +40,10 @@
 import { AuthService } from "~/src/services/AuthService";
 import { log } from "~/utils/Log";
 
+definePageMeta({
+    layout: "no-layout",
+});
+
 const valid = defineModel("vaild", { default: false });
 const loading = defineModel("loading", { default: false });
 
@@ -65,13 +69,18 @@ const passwordRule = [
 
 function login() {
     log.debug("login");
-    if (valid) {
+    if (valid.value) {
         loading.value = true;
+        log.debug("login form valid");
         AuthService.usernameLogin({
             username: username.value,
             password: password.value,
         })
-            .then((res) => {})
+            .then(() => {
+                navigateTo({
+                    path: "/",
+                });
+            })
             .catch((err) => {
                 log.error(err);
             })
