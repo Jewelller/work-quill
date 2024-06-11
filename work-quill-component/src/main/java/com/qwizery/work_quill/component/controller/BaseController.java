@@ -8,7 +8,7 @@ public abstract class BaseController {
         return Result.success(code, msg, data);
     }
 
-    protected <T> Result success(String code, String msg) {
+    protected Result success(String code, String msg) {
         return Result.success(code, msg);
     }
 
@@ -16,4 +16,7 @@ public abstract class BaseController {
         return Result.success(msg, data);
     }
 
+    protected Result error(String msg) {
+        return Result.error(msg);
+    }
 }

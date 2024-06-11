@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RefreshScope
 @RequestMapping("${app.base.api.prefix}")
-public class SecuredController extends BaseController {
+public class ForwardSecuredController extends BaseController {
 
     @Resource
     private RestTemplate rest;

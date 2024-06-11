@@ -1,6 +1,6 @@
 package com.qwizery.work_quill.server.base.auth.verify;
 
-import com.qwizery.work_quill.server.base.auth.record.UserLoginRecord;
+import com.qwizery.work_quill.server.base.auth.record.UserLoginInfoRecord;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class VerifyAuthentication extends AbstractAuthenticationToken {
 
     private String jwtToken; // 前端传过来
     private String jwtRefreshToken; // 前端传过来
-    private UserLoginRecord currentUser; // 认证成功后，后台从数据库获取信息
+    private UserLoginInfoRecord userInfo;
     private boolean needSendNewToken = false;
 
     public VerifyAuthentication() {
