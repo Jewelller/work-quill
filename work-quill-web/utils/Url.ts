@@ -5,4 +5,8 @@ export const API_URL = {
             username: "/auth/login/username",
         },
     },
+    user: "/user",
+    department: "/department",
+    member: "/member",
+    salary: "/salary",
 };

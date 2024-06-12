@@ -1,13 +1,29 @@
 <template>
-  <div>
-    
-  </div>
+    <div>
+        <DepartmentTable
+            :headers="headers"
+            :data-items="data"
+            :toolbar-title="$t('department.manage_department')"
+        />
+    </div>
 </template>
 
-<script lang="ts" setup>
-
+<script setup>
+const headers = [
+    {
+        title: "Department ID",
+        key: "departmentId",
+    },
+    {
+        title: "Department Name",
+        key: "departmentName",
+    },
+    {
+        title: "Actions",
+        key: "actions",
+    },
+];
+const data = [];
 </script>
 
-<style>
-
-</style>
+<style></style>

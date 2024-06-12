@@ -10,6 +10,7 @@ export function getNavRouteData(args: NavRouteDataParameter) {
             },
             title: args.userTitle,
             needsTranslate: false,
+            needsRole: [],
         },
         {
             props: {
@@ -17,8 +18,9 @@ export function getNavRouteData(args: NavRouteDataParameter) {
                 link: true,
                 to: "/",
             },
-            title: "home",
+            title: "nav.home",
             needsTranslate: true,
+            needsRole: [],
         },
         {
             props: {
@@ -26,8 +28,9 @@ export function getNavRouteData(args: NavRouteDataParameter) {
                 link: true,
                 to: "/account",
             },
-            title: "accounts",
+            title: "nav.accounts",
             needsTranslate: true,
+            needsRole: ["ROLE_ADMIN"],
         },
         {
             type: "divider",
@@ -38,8 +41,9 @@ export function getNavRouteData(args: NavRouteDataParameter) {
                 link: true,
                 to: "/department",
             },
-            title: "departments",
+            title: "nav.departments",
             needsTranslate: true,
+            needsRole: ['ROLE_ADMIN'],
         },
         {
             props: {
@@ -47,8 +51,9 @@ export function getNavRouteData(args: NavRouteDataParameter) {
                 link: true,
                 to: "/member",
             },
-            title: "members",
+            title: "nav.members",
             needsTranslate: true,
+            needsRole: ['ROLE_ADMIN'],
         },
         {
             props: {
@@ -56,8 +61,9 @@ export function getNavRouteData(args: NavRouteDataParameter) {
                 link: true,
                 to: "/salary",
             },
-            title: "salary",
+            title: "nav.salary",
             needsTranslate: true,
+            needsRole: ['ROLE_ADMIN'],
         },
     ];
 }
