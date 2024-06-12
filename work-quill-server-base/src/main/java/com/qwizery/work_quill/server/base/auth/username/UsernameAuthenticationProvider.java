@@ -45,7 +45,7 @@ public class UsernameAuthenticationProvider implements AuthenticationProvider {
         }
 
         UsernameAuthentication token = new UsernameAuthentication();
-        token.setCurrentUser(userOpt.get().getUserLoginRecord());
+        token.setCurrentUser(userOpt.get().userLoginRecord());
         token.setAuthenticated(true); // 认证通过，这里一定要设成true
         return token;
     }

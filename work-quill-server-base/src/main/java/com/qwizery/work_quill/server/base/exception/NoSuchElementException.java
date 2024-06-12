@@ -3,6 +3,7 @@ package com.qwizery.work_quill.server.base.exception;
 import org.springframework.http.HttpStatus;
 
 public class NoSuchElementException extends BaseException {
+    private static final String DEFAULT_ERROR_CODE = "missing_token";
     private static final HttpStatus DEFAULT_HTTP_STATUS = HttpStatus.BAD_REQUEST;
 
     public NoSuchElementException(String msg, HttpStatus httpStatus, String code) {
@@ -14,6 +15,6 @@ public class NoSuchElementException extends BaseException {
     }
 
     public NoSuchElementException(String msg) {
-        this(msg, BaseException.DEFAULT_ERROR_CODE);
+        this(msg, DEFAULT_ERROR_CODE);
     }
 }

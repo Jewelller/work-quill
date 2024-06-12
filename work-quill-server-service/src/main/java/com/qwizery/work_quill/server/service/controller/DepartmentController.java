@@ -1,6 +1,7 @@
 package com.qwizery.work_quill.server.service.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qwizery.work_quill.component.controller.BaseController;
 import com.qwizery.work_quill.component.model.Result;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("${app.base.api.prefix}/department")
@@ -32,7 +34,7 @@ public class DepartmentController extends BaseController {
      * @param department 查询实体
      * @return 所有数据
      */
-    @GetMapping
+    @PostMapping("/select-all")
     public Result selectAll(Page<Department> page, Department department) {
         return success(this.departmentService.page(page, new QueryWrapper<>(department)));
     }
@@ -43,7 +45,7 @@ public class DepartmentController extends BaseController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @PostMapping("/{id}")
     public Result selectOne(@PathVariable Serializable id) {
         return success(this.departmentService.getById(id));
     }
@@ -56,7 +58,15 @@ public class DepartmentController extends BaseController {
      */
     @PostMapping
     public Result insert(@RequestBody Department department) {
-        return success(this.departmentService.save(department));
+        if (Optional.ofNullable(departmentService.getOne(Wrappers.<Department>query()
+                .eq("department_name", department.getDepartmentName()
+                ))).isPresent()) {
+            return error("error.department_name_duplicate");
+        }
+        if (this.departmentService.save(department)) {
+            return success("op.success");
+        }
+        return error("op.fail");
     }
 
     /**
@@ -65,7 +75,7 @@ public class DepartmentController extends BaseController {
      * @param department 实体对象
      * @return 修改结果
      */
-    @PutMapping
+    @PostMapping("/update")
     public Result update(@RequestBody Department department) {
         return success(this.departmentService.updateById(department));
     }

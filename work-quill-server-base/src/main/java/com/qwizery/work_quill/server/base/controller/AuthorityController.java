@@ -34,7 +34,7 @@ public class AuthorityController extends AuthorizedController {
      * @param authority 查询实体
      * @return 所有数据
      */
-    @GetMapping
+    @PostMapping("/select-all")
     public Result selectAll(Page<Authority> page, Authority authority) {
         if (hasRole("ROLE_ADMIN")) {
             return success(this.authorityService.page(page, new QueryWrapper<>(authority)));
@@ -48,7 +48,7 @@ public class AuthorityController extends AuthorizedController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @PostMapping("{id}")
     public Result selectOne(@PathVariable Serializable id) {
         if (hasRole("ROLE_ADMIN")) {
             return success(this.authorityService.getById(id));
@@ -82,7 +82,7 @@ public class AuthorityController extends AuthorizedController {
      *
      * @return 修改结果
      */
-    @PutMapping
+    @PostMapping("/update")
     public Result update(HttpServletRequest request) {
         var authority = JSON.parse((String) request.getAttribute("requestBody"), Authority.class);
 

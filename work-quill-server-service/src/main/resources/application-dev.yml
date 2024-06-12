@@ -26,11 +26,6 @@ spring:
         server-addr: 127.0.0.1:8848
         group: WORK_QUILL
 
-management:
-  endpoint:
-    nacosdiscovery:
-      enabled: true
-
 # Custom configuration
 app:
   default-language: zh_CN

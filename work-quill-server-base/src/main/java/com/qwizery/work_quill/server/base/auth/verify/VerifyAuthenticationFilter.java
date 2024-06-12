@@ -109,6 +109,7 @@ public class VerifyAuthenticationFilter extends AbstractAuthenticationProcessing
         logger.debug("Using VerifyAuthenticationFilter");
 
         String requestJsonData = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        logger.debug("RequestBody: " + requestJsonData);
         Map<String, Object> requestMapData = JSON.parseToMap(requestJsonData);
 
         // Use this to parse object!

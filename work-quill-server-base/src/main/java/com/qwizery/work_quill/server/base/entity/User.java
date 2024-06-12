@@ -38,7 +38,7 @@ public class User extends Model<User> {
         return user;
     }
 
-    public UserLoginRecord getUserLoginRecord() {
+    public UserLoginRecord userLoginRecord() {
         return new UserLoginRecord(userId, username, nickname);
     }
 }

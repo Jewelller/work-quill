@@ -63,7 +63,7 @@ public class VerifyAuthenticationProvider implements AuthenticationProvider {
                 .toList();
 
 
-        return user.getUserLoginRecord().getUserLoginInfoRecord(userRoles, TimeTool.getExpireTime(nowDate, JwtTool.tokenExpireDuration));
+        return user.userLoginRecord().getUserLoginInfoRecord(userRoles, TimeTool.getExpireTime(nowDate, JwtTool.tokenExpireDuration));
     }
 
     @Override

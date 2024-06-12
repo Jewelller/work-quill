@@ -41,7 +41,7 @@ public class UserController extends AuthorizedController {
      * @param page 分页对象
      * @return 所有数据
      */
-    @GetMapping
+    @PostMapping("/select-all")
     public Result selectAll(Page<User> page, User user) {
         if (hasRole("ROLE_ADMIN")) {
             var data = this.userService.page(page, new QueryWrapper<>(user));
@@ -57,7 +57,7 @@ public class UserController extends AuthorizedController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @PostMapping("{id}")
     public Result selectOne(@PathVariable Serializable id) {
         if (hasRole("ROLE_ADMIN")) {
             var data = this.userService.getById(id);
@@ -98,13 +98,18 @@ public class UserController extends AuthorizedController {
      *
      * @return 修改结果
      */
-    @PutMapping
+    @PostMapping("/update")
     public Result update(HttpServletRequest request) {
         User user = JSON.parse((String) request.getAttribute("requestBody"), User.class);
 
         if (hasRole("ROLE_ADMIN")) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            if (this.userService.updateById(user)) {
+            var updatedUser = userService.getById(user.getUserId());
+            if (Optional.ofNullable(updatedUser).isPresent()) {
+                updatedUser.setUsername(user.getUsername());
+                updatedUser.setPassword(user.getPassword() == null ? updatedUser.getPassword() : passwordEncoder.encode(user.getPassword()));
+            }
+
+            if (this.userService.updateById(updatedUser)) {
                 return Result.success("op.success");
             }
             return error("op.fail");

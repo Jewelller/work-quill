@@ -34,4 +34,5 @@ public class GlobalExceptionHandler {
                 .msg(e.getMessage())
                 .build();
     }
+
 }

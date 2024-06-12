@@ -23,7 +23,7 @@ spring:
 logging:
   level:
     org.springframework.security: DEBUG
-    com.qwizery.workquillserverbase: DEBUG
+    com.qwizery.work_quill.server.base: DEBUG
 
 # Custom configuration
 app:
