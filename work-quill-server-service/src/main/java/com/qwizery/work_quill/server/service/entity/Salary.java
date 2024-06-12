@@ -1,5 +1,8 @@
 package com.qwizery.work_quill.server.service.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,9 +12,10 @@ import java.util.Date;
 
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class Salary extends Model<Salary> {
 
+    @TableId(type = IdType.AUTO)
     private Long salaryId;
 
     private Long memberId;
@@ -20,6 +24,7 @@ public class Salary extends Model<Salary> {
 
     private Date timestamp;
 
+    @TableLogic(value = "1", delval = "0")
     private Integer enabled;
 
     /**

@@ -1,8 +1,8 @@
 package com.qwizery.work_quill.server.base.auth.username;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qwizery.work_quill.server.base.entity.User;
-import com.qwizery.work_quill.server.base.mapper.UserMapper;
+import com.qwizery.work_quill.server.base.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class UsernameAuthenticationProvider implements AuthenticationProvider {
 
     @Resource
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Resource
     private PasswordEncoder passwordEncoder;
@@ -35,7 +35,7 @@ public class UsernameAuthenticationProvider implements AuthenticationProvider {
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
-        var userOpt = Optional.ofNullable(userMapper.selectOne(Wrappers.<User>query().eq("username", username)));
+        var userOpt = Optional.ofNullable(userService.getOne(new QueryWrapper<>(User.of(null, username))));
         if (userOpt.isEmpty() || !passwordEncoder.matches(password, userOpt.get().getPassword())) {
             // 用户不存在或密码错误，直接抛异常
             // 根据SpringSecurity框架的代码逻辑，认证失败时，应该抛这个异常：org.springframework.security.core.AuthenticationException
@@ -45,7 +45,7 @@ public class UsernameAuthenticationProvider implements AuthenticationProvider {
         }
 
         UsernameAuthentication token = new UsernameAuthentication();
-        token.setCurrentUser(userOpt.get().getUserLoginRecord());
+        token.setCurrentUser(userOpt.get().userLoginRecord());
         token.setAuthenticated(true); // 认证通过，这里一定要设成true
         return token;
     }

@@ -40,6 +40,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("com.baomidou:mybatis-plus-boot-starter:3.5.6")
 
+    implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
+
     // JWT
     implementation("io.jsonwebtoken:jjwt-api:0.12.5")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")

@@ -2,6 +2,7 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    ssr: false,
     app: {
         pageTransition: {
             name: "page",
@@ -23,6 +24,7 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
         "@nuxtjs/i18n",
+        "@nuxtjs/device",
     ],
     i18n: {
         vueI18n: "./i18n.config.ts",

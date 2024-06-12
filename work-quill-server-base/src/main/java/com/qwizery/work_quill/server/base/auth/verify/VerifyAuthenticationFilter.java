@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
@@ -54,11 +55,12 @@ public class VerifyAuthenticationFilter extends AbstractAuthenticationProcessing
             return;
         }
 
-        // Take over response
+        // Take over request and response
+        var requestWrapper = new ContentCachingRequestWrapper(request);
         var responseWrapper = new ContentCachingResponseWrapper(response);
 
         try {
-            Authentication authenticationResult = attemptAuthentication(request, responseWrapper);
+            Authentication authenticationResult = attemptAuthentication(requestWrapper, responseWrapper);
             if (authenticationResult == null) {
                 // return immediately as subclass has indicated that it hasn't completed
                 return;
@@ -70,9 +72,9 @@ public class VerifyAuthenticationFilter extends AbstractAuthenticationProcessing
                 // Set the authentication object into the SecurityContext
                 SecurityContextHolder.getContext().setAuthentication(authenticationResult);
 
-                chain.doFilter(request, responseWrapper);
+                chain.doFilter(requestWrapper, responseWrapper);
                 logger.debug("Controller finished, now go to VerifySuccessHandler");
-                successfulAuthentication(request, responseWrapper, chain, authenticationResult);
+                successfulAuthentication(requestWrapper, responseWrapper, chain, authenticationResult);
             }
         } catch (InternalAuthenticationServiceException failed) {
             this.logger.error("An internal error occurred while trying to authenticate the user.", failed);
@@ -107,7 +109,11 @@ public class VerifyAuthenticationFilter extends AbstractAuthenticationProcessing
         logger.debug("Using VerifyAuthenticationFilter");
 
         String requestJsonData = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        logger.debug("RequestBody: " + requestJsonData);
         Map<String, Object> requestMapData = JSON.parseToMap(requestJsonData);
+
+        // Use this to parse object!
+        request.setAttribute("requestBody", requestJsonData);
 
         var tokenOpt = Optional.ofNullable(requestMapData.get("token"));
         var refreshTokenOpt = Optional.ofNullable(requestMapData.get("refreshToken"));

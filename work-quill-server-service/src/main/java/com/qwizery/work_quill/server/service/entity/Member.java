@@ -1,5 +1,8 @@
 package com.qwizery.work_quill.server.service.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,9 +11,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class Member extends Model<Member> {
 
+    @TableId(type = IdType.AUTO)
     private Long memberId;
 
     private String name;
@@ -29,6 +33,7 @@ public class Member extends Model<Member> {
 
     private String memberAddress;
 
+    @TableLogic(value = "1", delval = "0")
     private Integer enabled;
 
 

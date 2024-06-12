@@ -32,7 +32,7 @@ public class MemberController extends BaseController {
      * @param member 查询实体
      * @return 所有数据
      */
-    @GetMapping
+    @PostMapping("/select-all")
     public Result selectAll(Page<Member> page, Member member) {
         return success(this.memberService.page(page, new QueryWrapper<>(member)));
     }
@@ -43,7 +43,7 @@ public class MemberController extends BaseController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @PostMapping("{id}")
     public Result selectOne(@PathVariable Serializable id) {
         return success(this.memberService.getById(id));
     }
@@ -65,7 +65,7 @@ public class MemberController extends BaseController {
      * @param member 实体对象
      * @return 修改结果
      */
-    @PutMapping
+    @PostMapping("/update")
     public Result update(@RequestBody Member member) {
         return success(this.memberService.updateById(member));
     }

@@ -2,11 +2,11 @@ package com.qwizery.work_quill.server.base.auth;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.qwizery.work_quill.component.model.Result;
-import com.qwizery.work_quill.server.base.mapper.RoleMapper;
-import com.qwizery.work_quill.server.base.util.JSON;
 import com.qwizery.work_quill.server.base.auth.record.UserLoginRecord;
-import com.qwizery.work_quill.server.base.entity.Role;
+import com.qwizery.work_quill.server.base.entity.Authority;
+import com.qwizery.work_quill.server.base.mapper.AuthorityMapper;
 import com.qwizery.work_quill.server.base.util.ExceptionTool;
+import com.qwizery.work_quill.server.base.util.JSON;
 import com.qwizery.work_quill.server.base.util.JwtTool;
 import com.qwizery.work_quill.server.base.util.TimeTool;
 import jakarta.annotation.Resource;
@@ -33,7 +33,7 @@ public class LoginSuccessHandler extends
         AbstractAuthenticationTargetUrlRequestHandler implements AuthenticationSuccessHandler {
 
     @Resource
-    private RoleMapper roleMapper;
+    private AuthorityMapper authorityMapper;
 
     public LoginSuccessHandler() {
         this.setRedirectStrategy((request, response, url) -> {
@@ -52,10 +52,10 @@ public class LoginSuccessHandler extends
         }
         UserLoginRecord currentUser = (UserLoginRecord) principal;
 
-        List<String> roleList = roleMapper.selectList(
-                Wrappers.<Role>query().eq("user_id", currentUser.userId())
+        List<String> roleList = authorityMapper.selectList(
+                        Wrappers.<Authority>query().eq("user_id", currentUser.userId())
         ).stream()
-                .map(Role::getRole)
+                .map(Authority::getRole)
                 .toList();
 
         Date now = TimeTool.getNowDate();

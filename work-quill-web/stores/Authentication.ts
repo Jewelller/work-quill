@@ -57,5 +57,12 @@ export const useAuthenticationStore = defineStore({
             this.nickname = userInfo.nickname;
             this.expireTime = new Date(parseInt(userInfo.expireTime));
         },
+        getUserTitle() {
+            return this.nickname
+                ? this.nickname
+                : this.username
+                ? this.username
+                : undefined;
+        },
     },
 });

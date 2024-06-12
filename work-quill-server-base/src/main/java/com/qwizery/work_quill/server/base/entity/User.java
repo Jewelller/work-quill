@@ -1,36 +1,45 @@
 package com.qwizery.work_quill.server.base.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.qwizery.work_quill.server.base.auth.record.UserLoginRecord;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 @Data
-public class User {
-    @TableId
-    private Long userId;
-    private String username;
-    private String nickname;
-    private String password;
-    private boolean enabled;
+@EqualsAndHashCode(callSuper = false)
+public class User extends Model<User> {
 
-    public UserLoginRecord getUserLoginRecord() {
-        return new UserLoginRecord(userId, username, nickname);
+    @TableId(type = IdType.AUTO)
+    private Long userId;
+
+    private String username;
+
+    private String nickname;
+
+    private String password;
+
+    @TableLogic(value = "1", delval = "0")
+    private Integer enabled;
+
+    @Override
+    public Serializable pkVal() {
+        return this.userId;
     }
 
     public static User of(Long userId, String username) {
-        var user = new User();
+        User user = new User();
         user.userId = userId;
         user.username = username;
-        user.enabled = true;
         return user;
     }
 
-    public static User ofId(Long userId) {
-        return of(userId, null);
+    public UserLoginRecord userLoginRecord() {
+        return new UserLoginRecord(userId, username, nickname);
     }
-
-    public static User ofUsername(String username) {
-        return of(null, username);
-    }
-
 }
+

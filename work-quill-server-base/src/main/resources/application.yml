@@ -47,6 +47,6 @@ app:
     private-key: # Read from local file
     public-key: # Read from local file
     # minutes
-    expire-time: 1
-    refresh-time: 60
+    expire-time: 60
+    refresh-time: 1480
 
